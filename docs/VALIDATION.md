@@ -41,3 +41,7 @@ The desk fixture was **generated for integration testing**. It is not a particip
 - Record, review and upload a publicly accessible video no longer than three minutes.
 - Arrange judge access to any live link submitted; the current Sites audience is owner-private.
 - Submit through the accepted participant account and observe confirmation before 8 PM CDMX.
+
+## Real-photo robustness follow-up
+
+The participant supplied an actual temporary classroom desk photo. The first hosted Spanish request failed output validation. A direct Spark retry returned a valid real-photo plan, demonstrating that the input itself was usable. Spark planning and verification have therefore moved to the documented constrained JSON-schema Chat Completions surface, with local Zod validation retained. Muse Image continues to use Responses. No real participant photo is committed to the public source repository.

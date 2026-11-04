@@ -1,15 +1,15 @@
 import { env } from 'cloudflare:workers';
 export class ApiError extends Error { constructor(message:string,public status=500){super(message);} }
 export function config(){const e=env as unknown as Record<string,string|undefined>;return {key:e.MODEL_API_KEY||process.env.MODEL_API_KEY,spark:e.META_SPARK_MODEL||process.env.META_SPARK_MODEL||'muse-spark-1.3',image:e.META_IMAGE_MODEL||process.env.META_IMAGE_MODEL||'muse-image-1.0'};}
-export async function meta(body:Record<string,unknown>,timeout=90_000){
+export async function meta(body:Record<string,unknown>,timeout=90_000,endpoint:'responses'|'chat/completions'='responses'){
  const key=config().key;if(!key)throw new ApiError('Meta is not connected yet. Add MODEL_API_KEY to the server environment.',503);
  const start=Date.now();
  let res:Response;
- try {res=await fetch('https://api.meta.ai/v1/responses',{method:'POST',headers:{Authorization:`Bearer ${key}`,'Content-Type':'application/json'},body:JSON.stringify({...body,store:false}),signal:AbortSignal.timeout(timeout)});}
+ try {res=await fetch(`https://api.meta.ai/v1/${endpoint}`,{method:'POST',headers:{Authorization:`Bearer ${key}`,'Content-Type':'application/json'},body:JSON.stringify(endpoint==='responses'?{...body,store:false}:body),signal:AbortSignal.timeout(timeout)});}
  catch {throw new ApiError('Meta did not respond in time. Your photo is still here; try again.',504);}
  if(!res.ok){const id=res.headers.get('x-request-id');await res.text();throw new ApiError(`Meta returned HTTP ${res.status}${id?` (request ${id.slice(0,80)})`:''}. ${res.status===401?'Check the server API key.':res.status===429?'Rate limit or credits may need attention. Retry shortly.':'Check model access and billing in your Meta dashboard.'}`,502);}
  const data=await res.json() as any;
- if(data.status==='failed'||data.status==='incomplete')throw new ApiError('Meta could not complete this request. Please retry.',502);
+ if(data.status==='failed'||data.status==='incomplete'||(data.choices?.[0]?.finish_reason&&data.choices[0].finish_reason!=='stop'))throw new ApiError('Meta could not complete this request. Please retry.',502);
  return {data,receipt:{model:String(data.model||body.model),responseId:String(data.id||''),elapsedMs:Date.now()-start,createdAt:new Date().toISOString()}};
 }
 export function errorResponse(error:unknown){if(import.meta.env.DEV && !(error instanceof ApiError)){const e=error as {name?:string;issues?:unknown};console.warn('PATCH response validation failure',{name:e.name,issues:e.issues});}if(error instanceof ApiError)return Response.json({error:error.message},{status:error.status});return Response.json({error:'The model response could not be validated. Please try another clear photo or retry.'},{status:502});}

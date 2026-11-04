@@ -29,3 +29,7 @@ test('accepts the actual six-observation Spark response that exposed the origina
  assert.equal(fixture.observations.length,6);
  assert.equal(patchSchema.safeParse(fixture).success,true);
 });
+
+test('reads a constrained Chat Completions result without mixing in other response fields',()=>{
+ assert.deepEqual(parseJSON(responseText({choices:[{message:{content:'{"safeToDIY":true}'},finish_reason:'stop'}]})),{safeToDIY:true});
+});

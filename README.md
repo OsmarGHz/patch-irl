@@ -42,7 +42,7 @@ Meta's participant guide notes that an active credit balance may still require a
 
 ## Actual Meta integration
 
-All inference calls use raw HTTPS `POST https://api.meta.ai/v1/responses`, Bearer `MODEL_API_KEY`, and `store:false`. No OpenAI or Gemini inference is used.
+All inference uses raw HTTPS and Bearer `MODEL_API_KEY` against Meta. Spark planning and verification use `POST https://api.meta.ai/v1/chat/completions` with a provider-side JSON schema; Muse Image uses `POST https://api.meta.ai/v1/responses` with `store:false`. No OpenAI or Gemini inference is used.
 
 | Operation | Default model | Input | Output |
 |---|---|---|---|
@@ -51,13 +51,14 @@ All inference calls use raw HTTPS `POST https://api.meta.ai/v1/responses`, Beare
 | `/api/verify` | `muse-spark-1.3` | Original + actual-after photos + plan | Validated visible-change assessment |
 | `/api/status` | No inference | None | Whether a key exists and configured model names |
 
-Muse Image uses its documented `image_generation` tool, low reasoning strength, WebP output and disabled web/image search and shell. Spark visible message text is parsed as JSON and checked with Zod; internal reasoning is not shown or parsed as the answer. Invalid model output fails visibly rather than becoming a fabricated result.
+Muse Image uses its documented `image_generation` tool, low reasoning strength, WebP output and disabled web/image search and shell. Spark uses the documented `response_format: json_schema` to constrain output, which is then parsed and checked with Zod; internal reasoning is not shown or parsed as the answer. Invalid model output fails visibly rather than becoming a fabricated result.
 
 Official documentation checked November 4, 2026:
 
 - [Image understanding](https://dev.meta.ai/docs/image-understanding)
 - [Image generation and response schema](https://dev.meta.ai/docs/image-generation)
 - [Models](https://dev.meta.ai/docs/models)
+- [Structured output](https://dev.meta.ai/docs/structured-output)
 - [Quickstart and authentication](https://dev.meta.ai/docs/quickstart)
 
 ## Fallback and honest limits
@@ -86,7 +87,7 @@ npm run typecheck
 npm run build
 ```
 
-Five protocol tests check photo restrictions, model-text extraction, bounded coordinates, required safety fields, verification status validation and an actual Spark response that exposed an overly strict observation limit. They do not prove model access or quality. See [docs/VALIDATION.md](docs/VALIDATION.md) for the current evidence, [docs/DEMO.md](docs/DEMO.md) for the three-minute recording script, and [docs/SUBMISSION.md](docs/SUBMISSION.md) for the final checklist.
+Six protocol tests check photo restrictions, model-text extraction, bounded coordinates, required safety fields, verification status validation and an actual Spark response that exposed an overly strict observation limit. They do not prove model access or quality. See [docs/VALIDATION.md](docs/VALIDATION.md) for the current evidence, [docs/DEMO.md](docs/DEMO.md) for the three-minute recording script, and [docs/SUBMISSION.md](docs/SUBMISSION.md) for the final checklist.
 
 ## License
 
@@ -97,3 +98,4 @@ Original project code: MIT. Third-party packages and included vendor assets reta
 [Watch or download the narrated 2:59 integration demo (MP4)](https://raw.githubusercontent.com/OsmarGHz/patch-irl/main/demo/patch-irl-demo.mp4)
 
 This edited walkthrough uses **an explicitly synthetic desk scene**, actual application captures and real Meta responses. Narration is generated with the macOS Samantha voice. It demonstrates the working software and a same-image negative control; it does not claim that a physical desk was improved. A personal real-desk case is still pending.
+
