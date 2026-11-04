@@ -91,3 +91,9 @@ Five protocol tests check photo restrictions, model-text extraction, bounded coo
 ## License
 
 Original project code: MIT. Third-party packages and included vendor assets retain their respective licenses. Use only photos and assets you have permission to use.
+
+## Demo video
+
+[Watch or download the narrated 2:59 integration demo (MP4)](https://raw.githubusercontent.com/OsmarGHz/patch-irl/main/demo/patch-irl-demo.mp4)
+
+This edited walkthrough uses **an explicitly synthetic desk scene**, actual application captures and real Meta responses. Narration is generated with the macOS Samantha voice. It demonstrates the working software and a same-image negative control; it does not claim that a physical desk was improved. A personal real-desk case is still pending.
