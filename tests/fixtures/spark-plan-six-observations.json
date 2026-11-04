@@ -1,0 +1,58 @@
+{
+  "title": "Renter-friendly desk cable detangle",
+  "summary": "Untangle the loose cables, keep only the connected white charger with slack routed to the rear edge, loosely coil the idle black and white cables at the back of the desk and park their ends using the existing mug handle, leaving the front work area clear with no drilling or purchases.",
+  "observations": [
+    "open laptop centered on light wooden desk near window with dark screen",
+    "white cable plugged into left side of laptop with loops across desk surface",
+    "multiple loose black and white cables with visible connectors crossing center and right of desk",
+    "white ceramic mug on right side of desk",
+    "small potted succulent in brown pot on left front corner",
+    "folded light gray cloth on front right of desk"
+  ],
+  "uncertainty": "Cable destinations, power source location, whether cables are powered, and internal wire condition or fraying under sheathing cannot be determined from this photo; whether mug contains liquid is not certain.",
+  "minutes": 20,
+  "costEstimate": "0 MXN - reuse on-desk items only, not verified pricing",
+  "materials": [
+    "existing loose cables on desk",
+    "existing ceramic mug as temporary cable stop",
+    "existing folded gray cloth as pad/marker"
+  ],
+  "steps": [
+    {
+      "title": "Separate cables gently",
+      "instruction": "With laptop closed or asleep, gently lift and separate the connected white charger from the loose black and white cables in the center so each cable lies flat without pulling on the laptop port.",
+      "point": {
+        "x": 48,
+        "y": 62
+      }
+    },
+    {
+      "title": "Route active charger to back",
+      "instruction": "Leave the white charger plugged in, form one loose slack loop and guide it toward the left rear edge of the desk so it no longer crosses the front work area, without tightening bends or placing weight on it.",
+      "point": {
+        "x": 27,
+        "y": 54
+      }
+    },
+    {
+      "title": "Loosely coil idle cables",
+      "instruction": "Loosely coil the remaining unconnected black and white cables into two flat loops and place them behind the laptop toward the back edge, keeping laptop vents and keyboard uncovered and coils loose and unpinched.",
+      "point": {
+        "x": 70,
+        "y": 59
+      }
+    },
+    {
+      "title": "Park ends and clear front",
+      "instruction": "Rest the unused connector ends together visibly near the mug but away from its opening, slipping one connector loosely through the mug handle as a reversible stop without tension, then nudge mug slightly back and keep folded cloth and plant in place to define a clear front zone.",
+      "point": {
+        "x": 78,
+        "y": 41
+      }
+    }
+  ],
+  "successCheck": "Front-center desk is clear; only the connected charger runs with loose slack to the rear edge; idle cables rest in loose coils at the back with all connector ends visible, not crossed over keyboard or over mug opening, and vents remain uncovered.",
+  "safety": "Do not pull tight, pinch cables under laptop, cover vents, or hide damage; keep connectors away from liquids; if fraying, exposed wire, heat, or burning smell is seen, stop and seek qualified help.",
+  "imagePrompt": "Edit THIS photo with same camera, lighting, room, desk, laptop, mug, plant, cloth and scale: show the same cables untangled, active white charger in one loose loop routed to rear left edge, other black and white cables in two loose flat coils tucked behind laptop at back edge with connector ends parked visibly near but not inside the empty mug, one end loosely through mug handle, front desk clear, no new objects, no drilling, no vent covering, realistic and reversible only.",
+  "safeToDIY": true
+}
